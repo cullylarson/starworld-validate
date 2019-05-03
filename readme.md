@@ -14,6 +14,10 @@
 
 1. I wanted a validator that can handle lists of data (e.g. an array of user IDs) as well as repeater fields, with sub-fields (e.g. a list of keywords with each keyword having a "label" and a "position" field–`{keywords: [ {label: "something", position: 100}, {label: "festival", 3} ]}`).
 
+1. I wanted to be able to handle cases where data is only validated if it passes certain conditions (e.g. only validate if data is not empty).
+
+1. I wanted to do all of this using functions that could be composed to easily extend the functionality of the library.
+
 ## Validators
 
 A validator must return a Promise that resolves to an object with these parameters:

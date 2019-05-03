@@ -120,17 +120,21 @@ export const validateListAsOne = curry((validators, values, params, paramName) =
     )(values)
 })
 
-// will only run the wrapped validator if the value is not empty (as determined by isEmpty)
-export const onlyNotEmpty = (validator) => {
+// will only run the wrapped validator if the value passes the provided test
+export const onlyIf = curry((testF, validator) => {
     // returns a validator that wraps the provided validator
     return curry((value, params, paramName) => {
-        return isEmpty(value)
-            // is empty, so we shouldn't validate it. return valid because we don't want to indicate that this is invalid
-            ? Promise.resolve(simpleValidationResult())
-            // not empty, continue validating
-            : validator(value, params, paramName)
+        return testF(value, params, paramName)
+            // passed, continue validating
+            ? validator(value, params, paramName)
+            // didn't pass the test, so we shouldn't validate it. return valid because we don't want to indicate that this is invalid
+            : Promise.resolve(simpleValidationResult())
     })
-}
+})
+
+// will only run the wrapped validator if the value is not empty.
+// useful if empty values are allowed but if a value is provided, you want to validate it
+export const onlyNotEmpty = onlyIf(x => !isEmpty(x))
 
 export const customMessages = curry((customMessages, validator) => {
     // returns a validator that wraps the provided validator
