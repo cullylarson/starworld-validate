@@ -8,6 +8,14 @@ test('Short string is valid.', () => {
         })
 })
 
+test('Empty string is valid.', () => {
+    return validateMaxLength(10, '', {})
+        .then(x => {
+            expect(x.isValid).toBe(true)
+            expect(x.messages.length).toBe(0)
+        })
+})
+
 test('String right at max length is valid.', () => {
     return validateMaxLength(4, 'food', {})
         .then(x => {
