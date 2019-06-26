@@ -31,6 +31,8 @@ export const validateOne = curry((params, validators, paramName) => {
 // doesn't work on arrays or objects (will always show them as empty, even if not)
 export const isEmpty = x => x === '' || x === undefined || x === null || x === false || (!isString(x) && !isNumeric(x))
 
+export const notEmpty = x => !isEmpty(x)
+
 // if x is non-empty, then assume it's an invalid result message(s)
 export const simpleValidationResult = x => x
     ? { isValid: false, messages: liftA(x) }
