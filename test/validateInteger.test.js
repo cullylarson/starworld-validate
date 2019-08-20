@@ -42,6 +42,19 @@ test('A non-integer string is not valid.', () => {
         }))
 })
 
+test('A string starting with a number is not valid.', () => {
+    return Promise.all([
+        validateInteger('1 one', {}),
+        validateInteger('3 foo', {}),
+        validateInteger('4asdf', {}),
+    ])
+        .then(map(x => {
+            expect(x.isValid).toBe(false)
+            expect(x.messages.length).toBe(1)
+            expect(x.messages.filter(x => x.code === 'not-integer').length).toBe(1)
+        }))
+})
+
 test('An array is not valid.', () => {
     validateInteger([], {})
         .then(x => {
