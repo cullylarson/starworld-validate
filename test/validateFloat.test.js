@@ -38,7 +38,7 @@ test('A non-float string is not valid.', () => {
         .then(map(x => {
             expect(x.isValid).toBe(false)
             expect(x.messages.length).toBe(1)
-            expect(x.messages.filter(x => x.code === 'not-integer').length).toBe(1)
+            expect(x.messages.filter(x => x.code === 'not-float').length).toBe(1)
         }))
 })
 
@@ -51,7 +51,7 @@ test('A string starting with a number is not valid.', () => {
         .then(map(x => {
             expect(x.isValid).toBe(false)
             expect(x.messages.length).toBe(1)
-            expect(x.messages.filter(x => x.code === 'not-integer').length).toBe(1)
+            expect(x.messages.filter(x => x.code === 'not-float').length).toBe(1)
         }))
 })
 
@@ -60,7 +60,7 @@ test('An array is not valid.', () => {
         .then(x => {
             expect(x.isValid).toBe(false)
             expect(x.messages.length).toBe(1)
-            expect(x.messages.filter(x => x.code === 'not-integer').length).toBe(1)
+            expect(x.messages.filter(x => x.code === 'not-float').length).toBe(1)
         })
 })
 
@@ -69,6 +69,6 @@ test('An object is not valid.', () => {
         .then(x => {
             expect(x.isValid).toBe(false)
             expect(x.messages.length).toBe(1)
-            expect(x.messages.filter(x => x.code === 'not-integer').length).toBe(1)
+            expect(x.messages.filter(x => x.code === 'not-float').length).toBe(1)
         })
 })
