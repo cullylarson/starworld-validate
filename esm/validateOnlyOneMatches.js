@@ -5,7 +5,7 @@ import {messageObj, simpleValidationResult} from './index'
 // returns true for only one value, the array is valid. Otherwise, not valid. Empty arrays are
 // always invalid.
 export default curry((f, value, params) => {
-    const getNotValid = () => Promise.resolve(simpleValidationResult(messageObj('no-match', 'Please provide a value.')))
+    const getNotValid = () => Promise.resolve(simpleValidationResult(messageObj('not-just-one-matched', 'Please provide a value.')))
 
     if(!Array.isArray(value) || !value.length) return getNotValid()
 
