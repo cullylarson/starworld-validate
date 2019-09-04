@@ -1,9 +1,20 @@
-import {liftA, compose, map, curry} from '@cullylarson/f'
+import {liftA, compose, curry, reduce, get} from '@cullylarson/f'
+import deepEqual from 'fast-deep-equal'
 import {messageObj, simpleValidationResult} from './index'
 
 const hasDuplicates = compose(
-    x => (new Set(x)).size !== x.length,
-    map(x => JSON.stringify(x))
+    get('foundDuplicate', true),
+    reduce((acc, x) => {
+        if(acc.foundDuplicate) return acc
+
+        return acc.uniqueValues.filter(y => deepEqual(y, x)).length > 0
+            // found a duplicate
+            ? {foundDuplicate: true}
+            : {
+                uniqueValues: [ ...acc.uniqueValues, x ],
+                foundDuplicate: false,
+            }
+    }, {uniqueValues: [], foundDuplicate: false})
 )
 
 // does a deep compare of objects and arrays (by value, not by reference)
