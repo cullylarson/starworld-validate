@@ -1,7 +1,7 @@
 import validateEmail from '../esm/validateEmail'
 
-test('My email address is valid.', () => {
-    return validateEmail('cully.larson@gmail.com', {})
+test('Example email address is valid.', () => {
+    return validateEmail('test@example.com', {})
         .then(x => {
             expect(x.isValid).toBe(true)
             expect(x.messages.length).toBe(0)
