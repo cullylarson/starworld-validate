@@ -1,7 +1,6 @@
 import {curry} from '@cullylarson/f'
 import {messageObj, simpleValidationResult} from './index'
-
-export const isEmailRegex = /^.+@.+\..+$/
+import isEmailRegex from './isEmailRegex'
 
 export default curry((value, params) => {
     return isEmailRegex.test(value)

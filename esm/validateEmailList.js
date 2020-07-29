@@ -1,6 +1,6 @@
 import {curry, isString, trim} from '@cullylarson/f'
 import {messageObj, simpleValidationResult} from './index'
-import {isEmailRegex} from './validateEmail'
+import isEmailRegex from './isEmailRegex'
 
 // If value is empty, will not return an error. Assumes a comma-separated list of email addresses. Will split, trim, and get rid of empty values. So, will not validate any empty values (e.g. "test@example.com, , another@example.com" will only test two email addresses). However, if there are only empty values, will return an error.
 export default curry((value, params) => {
