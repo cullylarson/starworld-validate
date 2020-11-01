@@ -10,7 +10,7 @@ const digitsAfterDecimal = x => {
 }
 
 export default curry(({allowZero = true, allowNegative = true}, value, params) => {
-    const notMoneyResult = simpleValidationResult(messageObj('not-dollars', 'Please provide a validate dollar amount.'))
+    const notMoneyResult = simpleValidationResult(messageObj('not-dollars', 'Please provide a valid dollar amount.'))
 
     if(!isFloat(value)) {
         return Promise.resolve(notMoneyResult)
