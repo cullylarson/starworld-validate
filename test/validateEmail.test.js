@@ -42,3 +42,38 @@ test('Domain missing, not valid.', () => {
             expect(x.messages.filter(x => x.code === 'not-valid').length).toBe(1)
         })
 })
+
+test('Whitespace in address, not valid.', () => {
+    return Promise.all([
+        validateEmail('aaa aaa@example.com', {})
+            .then(x => {
+                expect(x.isValid).toBe(false)
+                expect(x.messages.length).toBe(1)
+                expect(x.messages.filter(x => x.code === 'not-valid').length).toBe(1)
+            }),
+        validateEmail(' aaaaaa@example.com', {})
+            .then(x => {
+                expect(x.isValid).toBe(false)
+                expect(x.messages.length).toBe(1)
+                expect(x.messages.filter(x => x.code === 'not-valid').length).toBe(1)
+            }),
+        validateEmail('aaaaaa@ex ample.com', {})
+            .then(x => {
+                expect(x.isValid).toBe(false)
+                expect(x.messages.length).toBe(1)
+                expect(x.messages.filter(x => x.code === 'not-valid').length).toBe(1)
+            }),
+        validateEmail('aaaaaa@example.c om', {})
+            .then(x => {
+                expect(x.isValid).toBe(false)
+                expect(x.messages.length).toBe(1)
+                expect(x.messages.filter(x => x.code === 'not-valid').length).toBe(1)
+            }),
+        validateEmail('aaaaaa@example.com ', {})
+            .then(x => {
+                expect(x.isValid).toBe(false)
+                expect(x.messages.length).toBe(1)
+                expect(x.messages.filter(x => x.code === 'not-valid').length).toBe(1)
+            }),
+    ])
+})
