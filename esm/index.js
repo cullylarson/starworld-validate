@@ -9,6 +9,16 @@ export function messageObj(code, message) {
 }
 
 export const validateOne = curry((params, validators, paramName) => {
+    // if validators is not an array, then assume it's just a single validator and don't return the result as an array; keep the same structure as the passed validator.
+    if(!Array.isArray(validators)) {
+        return validators(get(paramName, undefined, params), params, paramName)
+            .then(result => {
+                return result.isValid
+                    ? {foundError: false, results: result.messages}
+                    : {foundError: true, results: result.messages}
+            })
+    }
+
     return validators
         // some validators might be null if set conditionally
         .filter(x => !!x)
@@ -86,7 +96,7 @@ export const validateList = curry((validators, values, params, paramName) => {
 })
 
 // performs validation on a list of items that each has its own set of parameters
-export const validateObjectList = curry((validators, values, params, paramName) => {
+export const validateObjectList = curry((validators, values) => {
     return compose(
         then(x => {
             return {
@@ -97,6 +107,19 @@ export const validateObjectList = curry((validators, values, params, paramName) 
         pAll,
         map((itemValues) => validate([], validators, itemValues))
     )(values)
+})
+
+// validates one param as an object with nested params
+export const validateObject = curry((validators, value) => {
+    return compose(
+        then(x => {
+            return {
+                isValid: x.isValid,
+                messages: x.paramErrors,
+            }
+        }),
+        validate([], validators),
+    )(value)
 })
 
 // runs validators on each item in a list, but halts on first error, and returns a validation result
