@@ -104,3 +104,53 @@ test('Shows as valid on array of values', () => {
             })
         })
 })
+
+test('Works if an item is missing.', () => {
+    return validate([], {
+        id: [
+            customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
+            customMessages({'not-integer': 'Id not integer.'}, validateInteger),
+        ],
+        keywords: [validateObjectList({
+            keyword: [customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty)],
+            position: [customMessages({'not-integer': 'Id not integer.'}, validateInteger)],
+        })],
+    }, {
+        keywords: [
+            {
+                position: 'asdf',
+            },
+            {
+                keyword: 'foo',
+                position: 20,
+            },
+            {
+                keyword: 'something',
+                position: 'ramble',
+            },
+        ],
+    })
+        .then(result => {
+            expect(result).toEqual({
+                isValid: false,
+                errors: [],
+                paramErrors: {
+                    id: [{code: 'is-empty', message: 'Id is empty.'}],
+                    keywords: [
+                        {
+                            keyword: [{code: 'is-empty', message: 'Id is empty.'}],
+                            position: [{code: 'not-integer', message: 'Id not integer.'}],
+                        },
+                        {
+                            keyword: [],
+                            position: [],
+                        },
+                        {
+                            keyword: [],
+                            position: [{code: 'not-integer', message: 'Id not integer.'}],
+                        },
+                    ],
+                },
+            })
+        })
+})
