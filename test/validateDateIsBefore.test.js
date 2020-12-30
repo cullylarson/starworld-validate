@@ -15,6 +15,8 @@ const toComponents = x => {
 }
 
 test('Is before other date and shows as valid.', () => {
+    expect.assertions(2 * 3)
+
     return Promise.all([
         validateDateIsBefore(toComponents, 'other', false, false, '2019-04-02', {other: '2019-04-03'}),
         validateDateIsBefore(toComponents, 'other', false, false, '2019-04-02', {other: '2020-04-02'}),
@@ -27,6 +29,8 @@ test('Is before other date and shows as valid.', () => {
 })
 
 test('Is not before other date and shows as not valid.', () => {
+    expect.assertions(3 * 2)
+
     return Promise.all([
         validateDateIsBefore(toComponents, 'other', false, false, '2019-04-02', {other: '2019-04-01'}),
         validateDateIsBefore(toComponents, 'other', false, false, '2019-04-02', {other: '2018-04-01'}),
@@ -39,6 +43,8 @@ test('Is not before other date and shows as not valid.', () => {
 })
 
 test('Same as other date and shows as not valid.', () => {
+    expect.assertions(3)
+
     return Promise.all([
         validateDateIsBefore(toComponents, 'other', false, false, '2019-04-02', {other: '2019-04-02'}),
     ])
@@ -50,6 +56,8 @@ test('Same as other date and shows as not valid.', () => {
 })
 
 test('Same as other date and shows as valid because of flag allowing it.', () => {
+    expect.assertions(2)
+
     return Promise.all([
         validateDateIsBefore(toComponents, 'other', false, true, '2019-04-02', {other: '2019-04-02'}),
     ])
@@ -60,6 +68,8 @@ test('Same as other date and shows as valid because of flag allowing it.', () =>
 })
 
 test('Other value is empty and shows as not valid.', () => {
+    expect.assertions(3 * 3)
+
     return Promise.all([
         validateDateIsBefore(toComponents, 'other', false, false, '2019-04-02', {other: ''}),
         validateDateIsBefore(toComponents, 'other', false, false, '2009-01-01', {other: ''}),
@@ -73,6 +83,8 @@ test('Other value is empty and shows as not valid.', () => {
 })
 
 test('Other value is empty and shows as valid because of flag indicating should only check if other value is provided.', () => {
+    expect.assertions(2 * 3)
+
     return Promise.all([
         validateDateIsBefore(toComponents, 'other', true, false, '2019-04-02', {other: ''}),
         validateDateIsBefore(toComponents, 'other', true, false, '2009-01-01', {other: ''}),

@@ -2,6 +2,8 @@ import {map} from '@cullylarson/f'
 import validateBoolean from '../esm/validateBoolean'
 
 test('True and false are valid.', () => {
+    expect.assertions(2 * 2)
+
     return Promise.all([
         validateBoolean(true, {}),
         validateBoolean(false, {}),
@@ -13,6 +15,8 @@ test('True and false are valid.', () => {
 })
 
 test('A variety of other types are not valid.', () => {
+    expect.assertions(3 * 9)
+
     return Promise.all([
         validateBoolean('true', {}),
         validateBoolean('false', {}),

@@ -1,6 +1,8 @@
 import validateOnlyOneMatches from '../esm/validateOnlyOneMatches'
 
 test('Array with one value matching is valid.', () => {
+    expect.assertions(2)
+
     return validateOnlyOneMatches(x => x === 2, [1, 2, 3], {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -9,6 +11,8 @@ test('Array with one value matching is valid.', () => {
 })
 
 test('Array with two matching values is not valid.', () => {
+    expect.assertions(2)
+
     return validateOnlyOneMatches(x => x === 2, [1, 2, 3, 2, 5], {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -17,6 +21,8 @@ test('Array with two matching values is not valid.', () => {
 })
 
 test('Empty array is not valid.', () => {
+    expect.assertions(2)
+
     return validateOnlyOneMatches(x => x === 2, [], {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -25,6 +31,8 @@ test('Empty array is not valid.', () => {
 })
 
 test('Array with no matching values is not valid.', () => {
+    expect.assertions(2)
+
     return validateOnlyOneMatches(x => x === 2, [3, 4, 5], {})
         .then(x => {
             expect(x.isValid).toBe(false)

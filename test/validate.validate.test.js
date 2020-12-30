@@ -3,6 +3,8 @@ import validateNotEmpty from '../esm/validateNotEmpty'
 import validateInteger from '../esm/validateInteger'
 
 test('Does simple validation', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
@@ -31,6 +33,8 @@ test('Does simple validation', () => {
 })
 
 test('Show valid data as valid', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
@@ -54,6 +58,8 @@ test('Show valid data as valid', () => {
 })
 
 test('Shows general validator message', () => {
+    expect.assertions(1)
+
     return validate([
         customMessages({'not-integer': 'Params not integer.'}, validateInteger),
         customMessages({'not-integer': 'Params not integer 2.'}, validateInteger),
@@ -95,6 +101,8 @@ test('Shows general validator message', () => {
 })
 
 test('Shows valid data as valid when using validateObject.', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
@@ -130,6 +138,8 @@ test('Shows valid data as valid when using validateObject.', () => {
 })
 
 test('Shows valid data as valid when using validateObjectList.', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
@@ -167,6 +177,8 @@ test('Shows valid data as valid when using validateObjectList.', () => {
 })
 
 test.only('Shows valid data as valid when using custom frankenstein validator.', () => {
+    expect.assertions(1)
+
     const validateKeyword = (value, params, paramName) => {
         const validators = [
             customMessages({'is-empty': 'Keyword is empty.'}, validateNotEmpty),

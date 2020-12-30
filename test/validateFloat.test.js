@@ -2,6 +2,8 @@ import {map} from '@cullylarson/f'
 import validateFloat from '../esm/validateFloat'
 
 test('A float is valid.', () => {
+    expect.assertions(2 * 5)
+
     return Promise.all([
         validateFloat(1, {}),
         validateFloat(1000.134, {}),
@@ -16,6 +18,8 @@ test('A float is valid.', () => {
 })
 
 test('A float string is valid.', () => {
+    expect.assertions(2 * 5)
+
     return Promise.all([
         validateFloat('1', {}),
         validateFloat('1000.34923', {}),
@@ -30,6 +34,8 @@ test('A float string is valid.', () => {
 })
 
 test('A non-float string is not valid.', () => {
+    expect.assertions(3 * 3)
+
     return Promise.all([
         validateFloat('one', {}),
         validateFloat('foo', {}),
@@ -43,6 +49,8 @@ test('A non-float string is not valid.', () => {
 })
 
 test('A string starting with a number is not valid.', () => {
+    expect.assertions(3 * 3)
+
     return Promise.all([
         validateFloat('1 one', {}),
         validateFloat('3 foo', {}),
@@ -56,6 +64,8 @@ test('A string starting with a number is not valid.', () => {
 })
 
 test('An array is not valid.', () => {
+    expect.assertions(3)
+
     validateFloat([], {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -65,6 +75,8 @@ test('An array is not valid.', () => {
 })
 
 test('An object is not valid.', () => {
+    expect.assertions(3)
+
     validateFloat({}, {})
         .then(x => {
             expect(x.isValid).toBe(false)

@@ -1,6 +1,8 @@
 import validateEmailWithName from '../esm/validateEmailWithName'
 
 test('Email address with name is valid.', () => {
+    expect.assertions(2)
+
     return validateEmailWithName('My Name <me@example.com>', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -9,6 +11,8 @@ test('Email address with name is valid.', () => {
 })
 
 test('Email address with name and no lt/gt around email is not valid.', () => {
+    expect.assertions(3)
+
     return validateEmailWithName('My Name me@example.com', {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -18,6 +22,8 @@ test('Email address with name and no lt/gt around email is not valid.', () => {
 })
 
 test('Just an email address is invalid.', () => {
+    expect.assertions(3)
+
     return validateEmailWithName('me@example.com', {})
         .then(x => {
             expect(x.isValid).toBe(false)

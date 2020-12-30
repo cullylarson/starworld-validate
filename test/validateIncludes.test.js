@@ -2,6 +2,8 @@ import {map} from '@cullylarson/f'
 import validateIncludes from '../esm/validateIncludes'
 
 test('Valid when value is in array.', () => {
+    expect.assertions(2 * 3)
+
     return Promise.all([
         validateIncludes(['asdf', 'foods', 'hoops'], 'foods', {}),
         validateIncludes([null, 'asdf'], null, {}),
@@ -14,6 +16,8 @@ test('Valid when value is in array.', () => {
 })
 
 test('Invalid when value is not in array.', () => {
+    expect.assertions(3 * 4)
+
     return Promise.all([
         validateIncludes(['asdf', 'foods', 'hoops'], 'joy', {}),
         validateIncludes([null, 'asdf'], 'hoops', {}),

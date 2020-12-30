@@ -4,6 +4,8 @@ import validateNotEmpty from '../esm/validateNotEmpty'
 import validateInteger from '../esm/validateInteger'
 
 test('Validates items with array of values', () => {
+    expect.assertions(1)
+
     return validate([], {
         ids: [validateListAsOne([
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
@@ -27,6 +29,8 @@ test('Validates items with array of values', () => {
 })
 
 test('Validates items with array of values, when the second value is not valid', () => {
+    expect.assertions(1)
+
     return validate([], {
         ids: [validateListAsOne([
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
@@ -50,6 +54,8 @@ test('Validates items with array of values, when the second value is not valid',
 })
 
 test('Shows as valid when using items with array of values', () => {
+    expect.assertions(1)
+
     return validate([], {
         ids: [validateListAsOne([
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
@@ -70,6 +76,8 @@ test('Shows as valid when using items with array of values', () => {
 })
 
 test('Validates items with array of values and the array itself', () => {
+    expect.assertions(1)
+
     return validate([], {
         ids: [
             customMessages({'not-date': 'List not a date.'}, validateDate(x => x)),
@@ -96,6 +104,8 @@ test('Validates items with array of values and the array itself', () => {
 })
 
 test('Validates items with array of values and the array itself, when the array itself validator comes second', () => {
+    expect.assertions(1)
+
     return validate([], {
         ids: [
             validateListAsOne([

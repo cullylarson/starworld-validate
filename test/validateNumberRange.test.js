@@ -1,6 +1,8 @@
 import validateNumberRange from '../esm/validateNumberRange'
 
 test('Number below range is not valid', () => {
+    expect.assertions(3)
+
     return validateNumberRange(7, 10, 6, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -10,6 +12,8 @@ test('Number below range is not valid', () => {
 })
 
 test('Number above range is not valid', () => {
+    expect.assertions(3)
+
     return validateNumberRange(7, 10, 11, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -19,6 +23,8 @@ test('Number above range is not valid', () => {
 })
 
 test('Number equal to lower range is valid', () => {
+    expect.assertions(2)
+
     return validateNumberRange(7, 10, 7, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -27,6 +33,8 @@ test('Number equal to lower range is valid', () => {
 })
 
 test('Number equal to upper range is valid', () => {
+    expect.assertions(2)
+
     return validateNumberRange(7, 10, 10, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -35,6 +43,8 @@ test('Number equal to upper range is valid', () => {
 })
 
 test('Number in middle of range is valid', () => {
+    expect.assertions(2)
+
     return validateNumberRange(7, 10, 8, {})
         .then(x => {
             expect(x.isValid).toBe(true)

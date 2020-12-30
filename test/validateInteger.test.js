@@ -2,6 +2,8 @@ import {map} from '@cullylarson/f'
 import validateInteger from '../esm/validateInteger'
 
 test('An integer is valid.', () => {
+    expect.assertions(2 * 5)
+
     return Promise.all([
         validateInteger(1, {}),
         validateInteger(1000, {}),
@@ -16,6 +18,8 @@ test('An integer is valid.', () => {
 })
 
 test('An integer string is valid.', () => {
+    expect.assertions(2 * 5)
+
     return Promise.all([
         validateInteger('1', {}),
         validateInteger('1000', {}),
@@ -30,6 +34,8 @@ test('An integer string is valid.', () => {
 })
 
 test('A non-integer string is not valid.', () => {
+    expect.assertions(3 * 3)
+
     return Promise.all([
         validateInteger('one', {}),
         validateInteger('foo', {}),
@@ -43,6 +49,8 @@ test('A non-integer string is not valid.', () => {
 })
 
 test('A string starting with a number is not valid.', () => {
+    expect.assertions(3 * 3)
+
     return Promise.all([
         validateInteger('1 one', {}),
         validateInteger('3 foo', {}),
@@ -56,6 +64,8 @@ test('A string starting with a number is not valid.', () => {
 })
 
 test('An array is not valid.', () => {
+    expect.assertions(3)
+
     validateInteger([], {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -65,6 +75,8 @@ test('An array is not valid.', () => {
 })
 
 test('An object is not valid.', () => {
+    expect.assertions(3)
+
     validateInteger({}, {})
         .then(x => {
             expect(x.isValid).toBe(false)

@@ -2,6 +2,8 @@ import {map} from '@cullylarson/f'
 import validateDollars from '../esm/validateDollars'
 
 test('A float dollar amount is valid.', () => {
+    expect.assertions(2 * 5)
+
     return Promise.all([
         validateDollars({allowZero: true, allowNegative: true}, 1, {}),
         validateDollars({allowZero: true, allowNegative: true}, 1000.13, {}),
@@ -16,6 +18,8 @@ test('A float dollar amount is valid.', () => {
 })
 
 test('A float string dollar amount is valid.', () => {
+    expect.assertions(2 * 5)
+
     return Promise.all([
         validateDollars({allowZero: true, allowNegative: true}, '1', {}),
         validateDollars({allowZero: true, allowNegative: true}, '1000.34', {}),
@@ -30,6 +34,8 @@ test('A float string dollar amount is valid.', () => {
 })
 
 test('A float with too many decimal places is not valid.', () => {
+    expect.assertions(3 * 5)
+
     return Promise.all([
         validateDollars({allowZero: true, allowNegative: true}, 1000.124, {}),
         validateDollars({allowZero: true, allowNegative: true}, 0.034, {}),
@@ -45,6 +51,8 @@ test('A float with too many decimal places is not valid.', () => {
 })
 
 test('Zero is not valid when not allowed.', () => {
+    expect.assertions(3 * 2)
+
     return Promise.all([
         validateDollars({allowZero: false, allowNegative: true}, 0, {}),
         validateDollars({allowZero: false, allowNegative: true}, '0', {}),
@@ -57,6 +65,8 @@ test('Zero is not valid when not allowed.', () => {
 })
 
 test('Negative is invalid when not allowed.', () => {
+    expect.assertions(3 * 5)
+
     return Promise.all([
         validateDollars({allowZero: true, allowNegative: false}, -1, {}),
         validateDollars({allowZero: true, allowNegative: false}, '-1', {}),
@@ -72,6 +82,8 @@ test('Negative is invalid when not allowed.', () => {
 })
 
 test('A non-float string is not valid.', () => {
+    expect.assertions(3 * 3)
+
     return Promise.all([
         validateDollars({allowZero: true, allowNegative: true}, 'one', {}),
         validateDollars({allowZero: true, allowNegative: true}, 'foo', {}),
@@ -85,6 +97,8 @@ test('A non-float string is not valid.', () => {
 })
 
 test('A string starting with a number is not valid.', () => {
+    expect.assertions(3 * 3)
+
     return Promise.all([
         validateDollars({allowZero: true, allowNegative: true}, '1 one', {}),
         validateDollars({allowZero: true, allowNegative: true}, '3 foo', {}),
@@ -98,6 +112,8 @@ test('A string starting with a number is not valid.', () => {
 })
 
 test('An array is not valid.', () => {
+    expect.assertions(3)
+
     validateDollars({allowZero: true, allowNegative: true}, [], {})
         .then(x => {
             expect(x.isValid).toBe(false)

@@ -1,6 +1,8 @@
 import validateLength from '../esm/validateLength'
 
 test('String at short end of range is valid.', () => {
+    expect.assertions(2)
+
     return validateLength(4, 10, 'food', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -9,6 +11,8 @@ test('String at short end of range is valid.', () => {
 })
 
 test('String at long end of range is valid.', () => {
+    expect.assertions(2)
+
     return validateLength(4, 10, 'foodfoodfo', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -17,6 +21,8 @@ test('String at long end of range is valid.', () => {
 })
 
 test('String in middle of range is valid.', () => {
+    expect.assertions(2)
+
     return validateLength(4, 10, 'foodfood', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -25,6 +31,8 @@ test('String in middle of range is valid.', () => {
 })
 
 test('Too-long string is not valid.', () => {
+    expect.assertions(3)
+
     return validateLength(3, 5, 'overrated', {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -34,6 +42,8 @@ test('Too-long string is not valid.', () => {
 })
 
 test('Too-short string is not valid.', () => {
+    expect.assertions(3)
+
     return validateLength(3, 5, 'ov', {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -43,6 +53,8 @@ test('Too-short string is not valid.', () => {
 })
 
 test('Integer is valid.', () => {
+    expect.assertions(2)
+
     return validateLength(3, 10, 12345, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -51,6 +63,8 @@ test('Integer is valid.', () => {
 })
 
 test('Too-long integer is not valid.', () => {
+    expect.assertions(3)
+
     return validateLength(3, 5, 123456, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -60,6 +74,8 @@ test('Too-long integer is not valid.', () => {
 })
 
 test('Too-short integer is not valid.', () => {
+    expect.assertions(3)
+
     return validateLength(3, 5, 12, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -69,6 +85,8 @@ test('Too-short integer is not valid.', () => {
 })
 
 test('Float is valid.', () => {
+    expect.assertions(2)
+
     return validateLength(3, 8, 12.345, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -77,6 +95,8 @@ test('Float is valid.', () => {
 })
 
 test('Too-long float is not valid.', () => {
+    expect.assertions(3)
+
     return validateLength(3, 5, 12.3456, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -86,6 +106,8 @@ test('Too-long float is not valid.', () => {
 })
 
 test('Too-short float is not valid.', () => {
+    expect.assertions(3)
+
     return validateLength(5, 8, 1.2, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -95,6 +117,8 @@ test('Too-short float is not valid.', () => {
 })
 
 test('Float is not valid because it includes the decimal when testing length.', () => {
+    expect.assertions(3)
+
     return validateLength(3, 5, 12.345, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -104,6 +128,8 @@ test('Float is not valid because it includes the decimal when testing length.', 
 })
 
 test('Float is valid when length includes the decimal and puts it right at the limit.', () => {
+    expect.assertions(2)
+
     return validateLength(3, 6, 12.345, {})
         .then(x => {
             expect(x.isValid).toBe(true)

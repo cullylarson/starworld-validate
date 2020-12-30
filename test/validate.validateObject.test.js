@@ -3,6 +3,8 @@ import validateNotEmpty from '../esm/validateNotEmpty'
 import validateInteger from '../esm/validateInteger'
 
 test('Validates items with array of values', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
@@ -34,6 +36,8 @@ test('Validates items with array of values', () => {
 })
 
 test('Works when params are all valid.', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
@@ -66,6 +70,8 @@ test('Works when params are all valid.', () => {
 })
 
 test("Works if a param isn't included.", () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),

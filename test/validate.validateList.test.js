@@ -4,6 +4,8 @@ import validateNotEmpty from '../esm//validateNotEmpty'
 import validateInteger from '../esm//validateInteger'
 
 test('Validates items with array of values', () => {
+    expect.assertions(1)
+
     return validate([], {
         ids: [validateList([
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
@@ -37,6 +39,8 @@ test('Validates items with array of values', () => {
 })
 
 test('Shows as valid when using items with array of values', () => {
+    expect.assertions(1)
+
     return validate([], {
         ids: [validateList([
             customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
@@ -61,6 +65,8 @@ test('Shows as valid when using items with array of values', () => {
 })
 
 test('Validates items with array of values and the array itself', () => {
+    expect.assertions(1)
+
     return validate([], {
         ids: [
             customMessages({'not-date': 'List not a date.'}, validateDate(x => x)),

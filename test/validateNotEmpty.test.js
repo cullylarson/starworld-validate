@@ -1,6 +1,8 @@
 import validateNotEmpty from '../esm/validateNotEmpty'
 
 test('Undefined is not valid.', () => {
+    expect.assertions(3)
+
     return validateNotEmpty(undefined, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -10,6 +12,8 @@ test('Undefined is not valid.', () => {
 })
 
 test('Empty string is not valid.', () => {
+    expect.assertions(3)
+
     return validateNotEmpty('', {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -19,6 +23,8 @@ test('Empty string is not valid.', () => {
 })
 
 test('null is not valid.', () => {
+    expect.assertions(3)
+
     return validateNotEmpty(null, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -28,6 +34,8 @@ test('null is not valid.', () => {
 })
 
 test('false is not valid.', () => {
+    expect.assertions(3)
+
     return validateNotEmpty(false, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -37,6 +45,8 @@ test('false is not valid.', () => {
 })
 
 test('Zero is valid.', () => {
+    expect.assertions(2)
+
     return validateNotEmpty(0, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -45,6 +55,8 @@ test('Zero is valid.', () => {
 })
 
 test('String is valid.', () => {
+    expect.assertions(2)
+
     return validateNotEmpty('food', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -53,6 +65,8 @@ test('String is valid.', () => {
 })
 
 test('Empty array is not valid.', () => {
+    expect.assertions(3)
+
     return validateNotEmpty([], {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -62,6 +76,8 @@ test('Empty array is not valid.', () => {
 })
 
 test('Array with values is not valid.', () => {
+    expect.assertions(3)
+
     return validateNotEmpty([1, 2, 'asdf'], {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -71,6 +87,8 @@ test('Array with values is not valid.', () => {
 })
 
 test('Object with is not valid.', () => {
+    expect.assertions(3)
+
     return validateNotEmpty({}, {a: 'b'})
         .then(x => {
             expect(x.isValid).toBe(false)

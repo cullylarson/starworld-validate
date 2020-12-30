@@ -1,6 +1,8 @@
 import validateMaxLength from '../esm/validateMaxLength'
 
 test('Short string is valid.', () => {
+    expect.assertions(2)
+
     return validateMaxLength(10, 'food', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -9,6 +11,8 @@ test('Short string is valid.', () => {
 })
 
 test('Empty string is valid.', () => {
+    expect.assertions(2)
+
     return validateMaxLength(10, '', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -17,6 +21,8 @@ test('Empty string is valid.', () => {
 })
 
 test('String right at max length is valid.', () => {
+    expect.assertions(2)
+
     return validateMaxLength(4, 'food', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -25,6 +31,8 @@ test('String right at max length is valid.', () => {
 })
 
 test('Long string is not valid.', () => {
+    expect.assertions(3)
+
     return validateMaxLength(5, 'overrated', {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -34,6 +42,8 @@ test('Long string is not valid.', () => {
 })
 
 test('Short integer is valid.', () => {
+    expect.assertions(2)
+
     return validateMaxLength(10, 12345, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -42,6 +52,8 @@ test('Short integer is valid.', () => {
 })
 
 test('Long integer is not valid.', () => {
+    expect.assertions(3)
+
     return validateMaxLength(5, 123456, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -51,6 +63,8 @@ test('Long integer is not valid.', () => {
 })
 
 test('Short float is valid.', () => {
+    expect.assertions(2)
+
     return validateMaxLength(10, 12.345, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -59,6 +73,8 @@ test('Short float is valid.', () => {
 })
 
 test('Float is valid right at max length.', () => {
+    expect.assertions(2)
+
     return validateMaxLength(6, 12.345, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -67,6 +83,8 @@ test('Float is valid right at max length.', () => {
 })
 
 test('Long float is not valid.', () => {
+    expect.assertions(3)
+
     return validateMaxLength(5, 12.3456, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -76,6 +94,8 @@ test('Long float is not valid.', () => {
 })
 
 test('Long float is not valid, with the decimal just pushing it over the limit.', () => {
+    expect.assertions(3)
+
     return validateMaxLength(5, 12.345, {})
         .then(x => {
             expect(x.isValid).toBe(false)

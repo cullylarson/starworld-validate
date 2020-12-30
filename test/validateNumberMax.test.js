@@ -1,6 +1,8 @@
 import validateNumberMax from '../esm/validateNumberMax'
 
 test('Number above max is not valid', () => {
+    expect.assertions(3)
+
     return validateNumberMax(7, 8, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -10,6 +12,8 @@ test('Number above max is not valid', () => {
 })
 
 test('A number a little small than max is valid', () => {
+    expect.assertions(2)
+
     return validateNumberMax(8, 7, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -18,6 +22,8 @@ test('A number a little small than max is valid', () => {
 })
 
 test('A number much smaller than max is valid', () => {
+    expect.assertions(2)
+
     return validateNumberMax(1129399949494, 7, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -26,6 +32,8 @@ test('A number much smaller than max is valid', () => {
 })
 
 test('Number equal to max is valid', () => {
+    expect.assertions(2)
+
     return validateNumberMax(7, 7, {})
         .then(x => {
             expect(x.isValid).toBe(true)

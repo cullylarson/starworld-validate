@@ -2,6 +2,8 @@ import {validate, onlyNotEmpty, customMessages} from '../esm/'
 import validateInteger from '../esm/validateInteger'
 
 test('Validates non-empty value', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             onlyNotEmpty(customMessages({'not-integer': 'Id not integer.'}, validateInteger)),
@@ -24,6 +26,8 @@ test('Validates non-empty value', () => {
 })
 
 test('Does not validate empty value', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             onlyNotEmpty(customMessages({'not-integer': 'Id not integer.'}, validateInteger)),
@@ -43,6 +47,8 @@ test('Does not validate empty value', () => {
 })
 
 test('Shows non-empty value as valid', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             onlyNotEmpty(customMessages({'not-integer': 'Id not integer.'}, validateInteger)),

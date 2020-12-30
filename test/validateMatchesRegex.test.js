@@ -2,6 +2,8 @@ import {map} from '@cullylarson/f'
 import validateMatchesRegex from '../esm/validateMatchesRegex'
 
 test('Matches is valid.', () => {
+    expect.assertions(2 * 3)
+
     return Promise.all([
         validateMatchesRegex(/^asdf$/, 'asdf', {}),
         validateMatchesRegex(/asdf$/, 'food-asdf', {}),
@@ -14,6 +16,8 @@ test('Matches is valid.', () => {
 })
 
 test('Does not match, is not valid.', () => {
+    expect.assertions(3 * 3)
+
     return Promise.all([
         validateMatchesRegex(/^asdf$/, 'asdff', {}),
         validateMatchesRegex(/asdf$/, 'food-asdff', {}),
@@ -27,6 +31,8 @@ test('Does not match, is not valid.', () => {
 })
 
 test('Array value is not valid.', () => {
+    expect.assertions(3)
+
     validateMatchesRegex(/^asdf$/, [], {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -36,6 +42,8 @@ test('Array value is not valid.', () => {
 })
 
 test('Object value is not valid.', () => {
+    expect.assertions(3)
+
     validateMatchesRegex(/^asdf$/, {}, {})
         .then(x => {
             expect(x.isValid).toBe(false)

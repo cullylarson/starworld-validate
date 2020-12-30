@@ -2,6 +2,8 @@ import {map} from '@cullylarson/f'
 import validateNoListDuplicates from '../esm/validateNoListDuplicates'
 
 test('No duplicates, is valid.', () => {
+    expect.assertions(2 * 4)
+
     return Promise.all([
         validateNoListDuplicates([1, 2, 'food', 'props', 1000], {}),
         validateNoListDuplicates(['hype', {hey: 'there'}, {hey: 'you'}, [1], [2]], {}),
@@ -15,6 +17,8 @@ test('No duplicates, is valid.', () => {
 })
 
 test('No duplicates when values are objects, is valid.', () => {
+    expect.assertions(2)
+
     return validateNoListDuplicates([{a: 'AAA', b: 'BBB'}], {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -23,6 +27,8 @@ test('No duplicates when values are objects, is valid.', () => {
 })
 
 test('Has duplicates, not valid.', () => {
+    expect.assertions(3 * 5)
+
     return Promise.all([
         validateNoListDuplicates([1, 1, 'food', 'props', 1000], {}),
         validateNoListDuplicates(['hype', {hey: 'there'}, {hey: 'there'}], {}),
@@ -38,6 +44,8 @@ test('Has duplicates, not valid.', () => {
 })
 
 test.only('Has duplicates when values are objects, not valid.', () => {
+    expect.assertions(3 * 2)
+
     return Promise.all([
         validateNoListDuplicates([{a: 'AAA', b: 'BBB'}, {a: 'AAA', b: 'BBB'}], {}),
         validateNoListDuplicates([{a: 'AAA', b: 'BBB'}, {b: 'BBB', a: 'AAA'}], {}),

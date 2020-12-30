@@ -2,6 +2,8 @@ import {map} from '@cullylarson/f'
 import validateNoDuplicatesComparator from '../esm/validateNoDuplicatesComparator'
 
 test('No duplicates, is valid.', () => {
+    expect.assertions(2 * 2)
+
     const comparator = (x, y) => x === y
 
     return Promise.all([
@@ -15,6 +17,8 @@ test('No duplicates, is valid.', () => {
 })
 
 test('No duplicates using non-strict comparison, is valid.', () => {
+    expect.assertions(2 * 2)
+
     const comparator = (x, y) => x == y // eslint-disable-line eqeqeq
 
     return Promise.all([
@@ -28,6 +32,8 @@ test('No duplicates using non-strict comparison, is valid.', () => {
 })
 
 test('Has duplicates, not valid.', () => {
+    expect.assertions(3 * 2)
+
     const comparator = (x, y) => x === y
 
     return Promise.all([
@@ -42,6 +48,8 @@ test('Has duplicates, not valid.', () => {
 })
 
 test('Has duplicates using non-strict comparison, not valid.', () => {
+    expect.assertions(3)
+
     const comparator = (x, y) => x == y // eslint-disable-line eqeqeq
 
     return Promise.all([

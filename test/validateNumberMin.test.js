@@ -1,6 +1,8 @@
 import validateNumberMin from '../esm/validateNumberMin'
 
 test('Number below min is not valid', () => {
+    expect.assertions(3)
+
     return validateNumberMin(7, 6, {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -10,6 +12,8 @@ test('Number below min is not valid', () => {
 })
 
 test('A number a little bigger than min is valid', () => {
+    expect.assertions(2)
+
     return validateNumberMin(7, 8, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -18,6 +22,8 @@ test('A number a little bigger than min is valid', () => {
 })
 
 test('A number much bigger than min is valid', () => {
+    expect.assertions(2)
+
     return validateNumberMin(7, 1129399949494, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -26,6 +32,8 @@ test('A number much bigger than min is valid', () => {
 })
 
 test('Number equal to min is valid', () => {
+    expect.assertions(2)
+
     return validateNumberMin(7, 7, {})
         .then(x => {
             expect(x.isValid).toBe(true)

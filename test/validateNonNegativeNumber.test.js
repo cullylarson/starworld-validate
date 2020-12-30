@@ -2,6 +2,8 @@ import {map} from '@cullylarson/f'
 import validateNonNegativeNumber from '../esm/validateNonNegativeNumber'
 
 test('Positive numbers, is valid.', () => {
+    expect.assertions(2 * 2)
+
     return Promise.all([
         validateNonNegativeNumber(1, {}),
         validateNonNegativeNumber(1000, {}),
@@ -13,6 +15,8 @@ test('Positive numbers, is valid.', () => {
 })
 
 test('Positive numbers as strings, is valid.', () => {
+    expect.assertions(2 * 2)
+
     return Promise.all([
         validateNonNegativeNumber('1', {}),
         validateNonNegativeNumber('1000', {}),
@@ -24,6 +28,8 @@ test('Positive numbers as strings, is valid.', () => {
 })
 
 test('Zero is valid.', () => {
+    expect.assertions(2)
+
     validateNonNegativeNumber(0, {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -32,6 +38,8 @@ test('Zero is valid.', () => {
 })
 
 test('Zero as string is valid.', () => {
+    expect.assertions(2)
+
     validateNonNegativeNumber('0', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -40,6 +48,8 @@ test('Zero as string is valid.', () => {
 })
 
 test('Negative number is not valid.', () => {
+    expect.assertions(3 * 2)
+
     return Promise.all([
         validateNonNegativeNumber(-1, {}),
         validateNonNegativeNumber(-10000, {}),
@@ -52,6 +62,8 @@ test('Negative number is not valid.', () => {
 })
 
 test('Negative numbers as strings are not valid.', () => {
+    expect.assertions(3 * 2)
+
     return Promise.all([
         validateNonNegativeNumber('-1', {}),
         validateNonNegativeNumber('-10000', {}),
@@ -64,6 +76,8 @@ test('Negative numbers as strings are not valid.', () => {
 })
 
 test("A non-integer string is valid (because the validator doesn't verify numeric values).", () => {
+    expect.assertions(2 * 2)
+
     return Promise.all([
         validateNonNegativeNumber('one', {}),
         validateNonNegativeNumber('foo', {}),

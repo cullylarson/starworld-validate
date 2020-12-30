@@ -1,6 +1,8 @@
 import validateEmail from '../esm/validateEmail'
 
 test('Example email address is valid.', () => {
+    expect.assertions(2)
+
     return validateEmail('test@example.com', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -9,6 +11,8 @@ test('Example email address is valid.', () => {
 })
 
 test('Super simple email is valid.', () => {
+    expect.assertions(2)
+
     return validateEmail('a@a.a', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -17,6 +21,8 @@ test('Super simple email is valid.', () => {
 })
 
 test('Top-level domain missing, not valid.', () => {
+    expect.assertions(3)
+
     return validateEmail('a@a', {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -26,6 +32,8 @@ test('Top-level domain missing, not valid.', () => {
 })
 
 test('Name before the @ missing, not valid.', () => {
+    expect.assertions(3)
+
     return validateEmail('@a.a', {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -35,6 +43,8 @@ test('Name before the @ missing, not valid.', () => {
 })
 
 test('Domain missing, not valid.', () => {
+    expect.assertions(3)
+
     return validateEmail('a@.a', {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -44,6 +54,8 @@ test('Domain missing, not valid.', () => {
 })
 
 test('Whitespace in address, not valid.', () => {
+    expect.assertions(15)
+
     return Promise.all([
         validateEmail('aaa aaa@example.com', {})
             .then(x => {

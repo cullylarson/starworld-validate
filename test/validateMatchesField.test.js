@@ -1,6 +1,8 @@
 import validateMatchesField from '../esm/validateMatchesField'
 
 test('Does match and is valid.', () => {
+    expect.assertions(2)
+
     return validateMatchesField('spice', 'Spice', 'food', {spice: 'food'})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -9,6 +11,8 @@ test('Does match and is valid.', () => {
 })
 
 test('Empty string is valid if it matches.', () => {
+    expect.assertions(2)
+
     return validateMatchesField('spice', 'Spice', '', {spice: ''})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -17,6 +21,8 @@ test('Empty string is valid if it matches.', () => {
 })
 
 test('Does not match and is not valid.', () => {
+    expect.assertions(3)
+
     return validateMatchesField('spice', 'Spice', 'food', {spice: 'heron'})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -26,6 +32,8 @@ test('Does not match and is not valid.', () => {
 })
 
 test('Missing field is not valid.', () => {
+    expect.assertions(3)
+
     return validateMatchesField('spice', 'Spice', '', {apes: 'are smart'})
         .then(x => {
             expect(x.isValid).toBe(false)

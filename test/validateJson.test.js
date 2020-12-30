@@ -1,6 +1,8 @@
 import validateJson from '../esm/validateJson'
 
 test('Works on valid JSON', () => {
+    expect.assertions(2)
+
     return validateJson('{"a": "AAA"}')
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -9,6 +11,8 @@ test('Works on valid JSON', () => {
 })
 
 test('Works on big valid JSON sample', () => {
+    expect.assertions(2)
+
     // this is random data from https://www.json-generator.com/
     const sample = `[
   {
@@ -336,6 +340,8 @@ test('Works on big valid JSON sample', () => {
 })
 
 test('Shows invalid JSON.', () => {
+    expect.assertions(3 * 4)
+
     const expectError = p => p.then(x => {
         expect(x.isValid).toBe(false)
         expect(x.messages.length).toBe(1)

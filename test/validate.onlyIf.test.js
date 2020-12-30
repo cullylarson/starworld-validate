@@ -4,6 +4,8 @@ import validateInteger from '../esm/validateInteger'
 const isNumber = x => typeof x === 'number'
 
 test('Runs validation on a numeric value, where the test is that it is numeric.', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             onlyIf(isNumber, customMessages({'not-integer': 'Id not integer.'}, validateInteger)),
@@ -26,6 +28,8 @@ test('Runs validation on a numeric value, where the test is that it is numeric.'
 })
 
 test('Does not run validation on a non-numeric value, where he test is that it is numeric.', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             onlyIf(isNumber, customMessages({'not-integer': 'Id not integer.'}, validateInteger)),
@@ -45,6 +49,8 @@ test('Does not run validation on a non-numeric value, where he test is that it i
 })
 
 test('Shows integer value as valid, when test is that it is numeric.', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             onlyIf(isNumber, customMessages({'not-integer': 'Id not integer.'}, validateInteger)),
@@ -64,6 +70,8 @@ test('Shows integer value as valid, when test is that it is numeric.', () => {
 })
 
 test('Runs validation on non-empty value, where the test is that it is not empty.', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             onlyIf(notEmpty, customMessages({'not-integer': 'Id not integer.'}, validateInteger)),
@@ -86,6 +94,8 @@ test('Runs validation on non-empty value, where the test is that it is not empty
 })
 
 test('Does not run validation on empty value, where the test is that it is not empty.', () => {
+    expect.assertions(1)
+
     return validate([], {
         id: [
             onlyIf(notEmpty, customMessages({'not-integer': 'Id not integer.'}, validateInteger)),

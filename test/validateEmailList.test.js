@@ -1,6 +1,8 @@
 import validateEmailList from '../esm/validateEmailList'
 
 test('One email address is valid.', () => {
+    expect.assertions(2)
+
     return validateEmailList('test@example.com', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -9,6 +11,8 @@ test('One email address is valid.', () => {
 })
 
 test('Empty string is valid.', () => {
+    expect.assertions(2)
+
     return validateEmailList('', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -17,6 +21,8 @@ test('Empty string is valid.', () => {
 })
 
 test('Multiple email addresses are valid.', () => {
+    expect.assertions(2)
+
     return validateEmailList('  test@example.com, another@example.com,   more@example.com  ', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -25,6 +31,8 @@ test('Multiple email addresses are valid.', () => {
 })
 
 test('Multiple email addresses with some empty values are valid.', () => {
+    expect.assertions(2)
+
     return validateEmailList('  test@example.com   ,  , another@example.com,   ,   more@example.com  ', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -33,6 +41,8 @@ test('Multiple email addresses with some empty values are valid.', () => {
 })
 
 test('Multipe email addresses with one not valid.', () => {
+    expect.assertions(3)
+
     return validateEmailList('test@xample.com, a@a, anothher@example.com', {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -42,6 +52,8 @@ test('Multipe email addresses with one not valid.', () => {
 })
 
 test('All empty values is not valid.', () => {
+    expect.assertions(3)
+
     return validateEmailList(', ,', {})
         .then(x => {
             expect(x.isValid).toBe(false)

@@ -2,6 +2,8 @@ import {map} from '@cullylarson/f'
 import validateUrl from '../esm/validateUrl'
 
 test('Url is valid.', () => {
+    expect.assertions(2 * 11)
+
     return Promise.all([
         validateUrl('http://example.com', {}),
         validateUrl('http://www.example.com', {}),
@@ -22,6 +24,8 @@ test('Url is valid.', () => {
 })
 
 test('Url is not valid.', () => {
+    expect.assertions(3 * 2)
+
     return Promise.all([
         validateUrl('://example.com', {}),
         validateUrl('example.com', {}),

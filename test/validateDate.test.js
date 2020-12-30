@@ -15,6 +15,8 @@ const toComponents = x => {
 }
 
 test('String date is valid.', () => {
+    expect.assertions(2)
+
     return validateDate(toComponents, '2019-04-02', {})
         .then(x => {
             expect(x.isValid).toBe(true)
@@ -23,6 +25,8 @@ test('String date is valid.', () => {
 })
 
 test('String date is not valid.', () => {
+    expect.assertions(3)
+
     return validateDate(toComponents, '2019-04-32', {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -32,6 +36,8 @@ test('String date is not valid.', () => {
 })
 
 test('Date with two digit year is not valid.', () => {
+    expect.assertions(3)
+
     return validateDate(toComponents, '19-4-2', {})
         .then(x => {
             expect(x.isValid).toBe(false)
@@ -41,6 +47,8 @@ test('Date with two digit year is not valid.', () => {
 })
 
 test('Date with one digit month and day is valid.', () => {
+    expect.assertions(2)
+
     return validateDate(toComponents, '2019-4-2', {})
         .then(x => {
             expect(x.isValid).toBe(true)
