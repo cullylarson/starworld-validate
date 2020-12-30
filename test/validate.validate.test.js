@@ -1,4 +1,4 @@
-import {validate, customMessages} from '../esm/'
+import {validate, customMessages, validateObject, validateObjectList} from '../esm/'
 import validateNotEmpty from '../esm/validateNotEmpty'
 import validateInteger from '../esm/validateInteger'
 
@@ -89,6 +89,119 @@ test('Shows general validator message', () => {
                         code: 'is-empty',
                         message: 'Name is empty.',
                     }],
+                },
+            })
+        })
+})
+
+test('Shows valid data as valid when using validateObject.', () => {
+    return validate([], {
+        id: [
+            customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
+            customMessages({'not-integer': 'Id not integer.'}, validateInteger),
+        ],
+        name: [customMessages({'is-empty': 'Name is empty.'}, validateNotEmpty)],
+        extras: validateObject({
+            keyword: [customMessages({'is-empty': 'Keyword is empty.'}, validateNotEmpty)],
+            order: [customMessages({'is-empty': 'Order is empty.'}, validateNotEmpty)],
+        }),
+    }, {
+        id: 123,
+        name: 'Someone',
+        extras: {
+            keyword: 'asdf',
+            order: 10,
+        },
+    })
+        .then(result => {
+            expect(result).toEqual({
+                isValid: true,
+                errors: [],
+                paramErrors: {
+                    id: [],
+                    name: [],
+                    extras: {
+                        keyword: [],
+                        order: [],
+                    },
+                },
+            })
+        })
+})
+
+test('Shows valid data as valid when using validateObjectList.', () => {
+    return validate([], {
+        id: [
+            customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
+            customMessages({'not-integer': 'Id not integer.'}, validateInteger),
+        ],
+        name: [customMessages({'is-empty': 'Name is empty.'}, validateNotEmpty)],
+        keywords: [
+            validateObjectList({
+                keyword: [customMessages({'is-empty': 'Keyword is empty.'}, validateNotEmpty)],
+                order: [customMessages({'is-empty': 'Order is empty.'}, validateNotEmpty)],
+            }),
+        ],
+    }, {
+        id: 123,
+        name: 'Someone',
+        keywords: [{
+            keyword: 'asdf',
+            order: 10,
+        }],
+    })
+        .then(result => {
+            expect(result).toEqual({
+                isValid: true,
+                errors: [],
+                paramErrors: {
+                    id: [],
+                    name: [],
+                    keywords: [{
+                        keyword: [],
+                        order: [],
+                    }],
+                },
+            })
+        })
+})
+
+test.only('Shows valid data as valid when using custom frankenstein validator.', () => {
+    const validateKeyword = (value, params, paramName) => {
+        const validators = [
+            customMessages({'is-empty': 'Keyword is empty.'}, validateNotEmpty),
+        ]
+
+        return validate([], {[paramName]: validators}, params)
+            .then(result => {
+                return {
+                    isValid: result.isValid,
+                    messages: result.paramErrors[paramName],
+                }
+            })
+    }
+
+    return validate([], {
+        id: [
+            customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
+            customMessages({'not-integer': 'Id not integer.'}, validateInteger),
+        ],
+        name: [customMessages({'is-empty': 'Name is empty.'}, validateNotEmpty)],
+        // intentially not setting as an array
+        keyword: validateKeyword,
+    }, {
+        id: 123,
+        name: 'Someone',
+        keyword: 'asdf',
+    })
+        .then(result => {
+            expect(result).toEqual({
+                isValid: true,
+                errors: [],
+                paramErrors: {
+                    id: [],
+                    name: [],
+                    keyword: [],
                 },
             })
         })
