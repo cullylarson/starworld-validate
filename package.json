@@ -1,6 +1,6 @@
 {
   "name": "@cullylarson/validate",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A compossible data validation library.",
   "main": "cjs/",
   "module": "esm/",
