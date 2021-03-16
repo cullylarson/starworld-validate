@@ -63,7 +63,7 @@ const validateUser = validate([
     id: [validateNotEmpty, validateInteger],
     name: [validateNotEmpty],
     email: [
-        customMessage({'is-empty', 'You must provide an email address.'}, validateNotEmpty),
+        customMessages({'is-empty': 'You must provide an email address.'}, validateNotEmpty),
         validateEmail,
     ],
     description: [],
