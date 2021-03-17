@@ -214,3 +214,57 @@ test('Works on an object instead of an array.', () => {
             })
         })
 })
+
+test('Shows as valid when using on a keyed object.', () => {
+    expect.assertions(1)
+
+    return validate([], {
+        id: [
+            customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty),
+            customMessages({'not-integer': 'Id not integer.'}, validateInteger),
+        ],
+        keywords: validateObjectList({
+            keyword: [customMessages({'is-empty': 'Id is empty.'}, validateNotEmpty)],
+            position: [customMessages({'not-integer': 'Id not integer.'}, validateInteger)],
+        }),
+    }, {
+        id: 20,
+        keywords: {
+            'aaa': {
+                keyword: 'foo',
+                position: 20,
+            },
+            'bbb': {
+                keyword: 'foo',
+                position: 20,
+            },
+            'ccc': {
+                keyword: 'foo',
+                position: 20,
+            },
+        },
+    })
+        .then(result => {
+            expect(result).toEqual({
+                isValid: true,
+                errors: [],
+                paramErrors: {
+                    id: [],
+                    keywords: {
+                        'aaa': {
+                            keyword: [],
+                            position: [],
+                        },
+                        'bbb': {
+                            keyword: [],
+                            position: [],
+                        },
+                        'ccc': {
+                            keyword: [],
+                            position: [],
+                        },
+                    },
+                },
+            })
+        })
+})

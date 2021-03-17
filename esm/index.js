@@ -100,7 +100,8 @@ export const validateObjectList = curry((validators, values) => {
     return compose(
         then(x => {
             return {
-                isValid: filter(y => !y.isValid, x).length === 0,
+                // need to Object.values in case this is an object (works with arrays too)
+                isValid: Object.values(filter(y => !y.isValid, x)).length === 0,
                 messages: map(get('paramErrors', []), x),
             }
         }),
